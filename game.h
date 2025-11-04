@@ -25,7 +25,14 @@ private:
 public:
   Enemy(string n, int h, int a);
   Enemy(){name = "", health = 0, attackPower = 0;}
+
+  string getName(void){return name;}
+  int getHealth(void){return health;}
+  int getAttackPower(void){return attackPower;}
+  void setHealth(int h){health -= h;}
 };
+Enemy::Enemy(string n, int h, int a) : name(n), health(h), attackPower(a){}
+
 
 
 class Place {
