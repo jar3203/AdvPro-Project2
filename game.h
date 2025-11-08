@@ -9,12 +9,12 @@ private:
   string name;
   string desc;
 public:
-  Item(string n, string d);
+  Item(string n, string d) : name(n), desc(d){}
+  //Item(string n, string d);
   //Item(){name = "", desc = "";}
-  string getName(void){return name;}
-  string getDesc(void){return desc;}
+  string getName(void) const {return name;}
+  string getDesc(void) const {return desc;}
 };
-//Item::Item(string n, string d) : name(n), desc(d){}
 
 
 class Enemy {
@@ -23,7 +23,8 @@ private:
   int health;
   int attackPower;
 public:
-  Enemy(string n, int h, int a);
+  Enemy(string n, int h, int a) : name(n), health(h), attackPower(a){}
+  //Enemy(string n, int h, int a);
   //Enemy(){name = "", health = 0, attackPower = 0;}
   string getName(void){return name;}
   int getHealth(void){return health;}
@@ -41,7 +42,8 @@ public:
   vector<Enemy> enemyList;
   vector<Place*> placeList;
 
-  Place(string desc);
+  //Place(string desc);
+  Place(string desc) : desc(desc) {}
   string getDesc(){return desc;}
   void addItem(const Item& i){itemList.push_back(i);}
   void addEnemy(const Enemy& e){enemyList.push_back(e);}
@@ -76,6 +78,9 @@ class Player {
   
   public: 
   Place* currentPlace; 
+  string getName() const { return name; }
+  int getHealth() const { return health; }
+  int getAttackPower() const { return attackPower; }
   
   //Functions
   Player(const string& n, int h, int a) : name(n), health(h), attackPower(a), currentPlace(nullptr) {}; 
@@ -95,15 +100,20 @@ class Player {
 	  }	  
   }
   
-  void displayInventory() const {
-	  cout << "Inventory:" << endl; 
-	  if (inventory.empty()) {
-		  cout << "Inventory is empty" << endl;
-		  return; 
+  void displayInventory() const { 
+	  if (inventory.empty()) 
+	  {
+			cout << "Inventory is empty." << endl;
+	  } 
+	  else 
+	  {
+			cout << "Inventory:" << endl;
+			// ... print items ...
 	  }
-	  for (const auto& i : inventory) {
+	  for (const auto& i : inventory)
+	  {
 			cout << "- " << i.getName() << ": " << i.getDesc() << endl; 
-	} 
+	  }
   }
   
   void moveToPlace(Place* p) {
@@ -111,5 +121,6 @@ class Player {
 	  currentPlace = p; 
 	  cout << name << " moves to " << p->getDesc() << endl; 
   }
+  
  };
 
